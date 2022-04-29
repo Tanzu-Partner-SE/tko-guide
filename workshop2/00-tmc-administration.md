@@ -40,7 +40,7 @@ There is a one-to-one relationship between your cloud provider account and the c
 
     ![](images/aws-s3-4.png)
 
-    iv. Click on next, on the follow the steps as the screenshots below
+    iv. Click on next, and then follow the steps as the screenshots below
 
     ![](images/aws-s3-5.png)
 
@@ -63,7 +63,7 @@ There is a one-to-one relationship between your cloud provider account and the c
 
 Set up a credential for data protection that allows you to create a target location that uses an S3-compatible storage location that you create and maintain (either in your cloud provider account or in an on-premises data center).
 
-1. On the Accounts tab of the Administration a page, click Create Account Credential, and then select the type of _AWS S3 or S3-compatible_
+1. On the Accounts tab of the Administration page, click Create Account Credential, and then select the type of _AWS S3 or S3-compatible_
 
 ![](images/minio-creds-1.png)
 
@@ -81,7 +81,7 @@ The name that you enter is the name that appears in the list of credential objec
 
 Set up a credential object to connect to your Tanzu Observability by Wavefront account, to enable you to add clusters to Tanzu Observability through VMware Tanzu Mission Control.
 
-1. On the the Accounts tab of the Administration page, click Create Account Credential, and then select Tanzu Observability by Wavefront credential.
+1. On the Accounts tab of the Administration page, click Create Account Credential, and then select Tanzu Observability by Wavefront credential.
 
     ![](images/to-creds-1.png)
 
