@@ -83,7 +83,6 @@ tmc cluster validate -k .kube/config
 ```
 
 ```execute-all
-```clear
 ```
 
 * Create your session's **Workspace: [my session]-ws**
@@ -110,5 +109,4 @@ tmc cluster namespace create -n [my session namespace] -k [my session]-ws -c [my
 kubectl get ns [my seesion namespace] --kubeconfig=.kube/config
 ```
 ```execute-all
-```clear
 ```
