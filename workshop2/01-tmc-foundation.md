@@ -87,7 +87,7 @@ name: VMware Tanzu Mission Control Feature Comparison Chart
 <p style='margin-top:1em; text-align:left'>
 <b>Note:</b></p>
 <p style='margin-left:1em;'>
-Tanzu Mission Control Advanced is part of the Tanzu Kubernetes Operation TKO Bundle.
+Tanzu Mission Control Advanced is part of the Tanzu for Kubernetes Operations (TKO) Bundle.
 </p>
 </span>
 </div>
