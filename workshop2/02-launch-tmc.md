@@ -34,20 +34,44 @@ If you don't have an API token to access TMC, see [How Do I Generate API Tokens]
 
 
 ```execute-1
-tmc login -n {{ session_namespace }} --no-configure
+tmc login -n [login context name] --no-configure
 ```
 
 * Configure environment defaults that make the CLI easier to use. 
 
 ```execute-1
-tmc system context configure -l "log" -m attached -p attached
+tmc system context configure -l [log level] -m [management cluster name] -p [provisioner name]
 ```
 
-**Attach your Cluster to under tko-day1-ops-cg Cluster Group**
+**Create and prepare your TMC resources**
 
+* Create your session's **Cluster Group: [my session]-cg**
 
 ```execute-1
-tmc cluster attach -g tko-day1-ops-cg -n {{ session_namespace }}-cluster -k .kube/config
+tmc clustergroup create -n [my session]-cg
+```
+* Confirm that the cluster group **[my session]-cg** has been created    
+
+```execute-1
+tmc clustergroup get [my session]-cg 
+```
+   
+* Add your Cluster Group to the **aws-s3-store** Backup Location 
+
+```execute-1
+tmc dataprotection provider backuplocation update aws-s3-store --assigned-cluster-groups [my session]-cg 
+```
+
+* Confirm that the cluster group **[my session]-cg** has been added to **aws-s3-store** Backup Location 
+
+```execute-1
+tmc dataprotection provider backuplocation get aws-s3-store -o json
+```
+
+* Attach your Cluster to [my session]-cg Cluster Group
+
+```execute-1
+tmc cluster attach -g [my session]-cg -n [my cluster name] -k .kube/config
 ```
 
 On Tanzu Mission Control console, wait until the attachment is complete, and then the cluster **{{ session_namespace }}-cluster** state changes to **Healthy**
@@ -56,6 +80,34 @@ On Tanzu Mission Control console, wait until the attachment is complete, and the
 
 ```execute-1
 tmc cluster validate -k .kube/config
+```
+
+```execute-all
+clear
+```
+
+* Create your session's **Workspace: {{ session_namespace }}-ws**
+
+```execute-1
+tmc workspace create -n {{ session_namespace }}-ws
+```
+
+* Confirm that the workspace **{{ session_namespace }}-ws** has been created    
+
+```execute-1
+tmc workspace get {{ session_namespace }}-ws 
+```
+
+* Create **{{ session_namespace }}** namespace and add it to the workspace **{{ session_namespace }}-ws**:
+
+```execute-1
+tmc cluster namespace create -n {{ session_namespace }} -k {{ session_namespace }}-ws -c {{ session_namespace }}-cluster
+```
+
+* Confirm that the Namespace has been created
+
+```execute-1
+kubectl get ns {{ session_namespace }} --kubeconfig=.kube/config
 ```
 ```execute-all
 clear
