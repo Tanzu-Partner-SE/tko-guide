@@ -74,7 +74,7 @@ tmc dataprotection provider backuplocation get aws-s3-store -o json
 tmc cluster attach -g [my session]-cg -n [my cluster name] -k .kube/config
 ```
 
-On Tanzu Mission Control console, wait until the attachment is complete, and then the cluster **{{ session_namespace }}-cluster** state changes to **Healthy**
+On Tanzu Mission Control console, wait until the attachment is complete, and then the cluster **[my cluster name]** state changes to **Healthy**
 
 ![](images/tmc-attach.png)
 
@@ -86,28 +86,28 @@ tmc cluster validate -k .kube/config
 clear
 ```
 
-* Create your session's **Workspace: {{ session_namespace }}-ws**
+* Create your session's **Workspace: [my session]-ws**
 
 ```execute-1
-tmc workspace create -n {{ session_namespace }}-ws
+tmc workspace create -n [my session]-ws
 ```
 
-* Confirm that the workspace **{{ session_namespace }}-ws** has been created    
+* Confirm that the workspace **[my session]-ws** has been created    
 
 ```execute-1
-tmc workspace get {{ session_namespace }}-ws 
+tmc workspace get [my session]-ws 
 ```
 
-* Create **{{ session_namespace }}** namespace and add it to the workspace **{{ session_namespace }}-ws**:
+* Create **[my seesion namespace]** and add it to the workspace **[my session]-ws**:
 
 ```execute-1
-tmc cluster namespace create -n {{ session_namespace }} -k {{ session_namespace }}-ws -c {{ session_namespace }}-cluster
+tmc cluster namespace create -n [my session namespace] -k [my session]-ws -c [my cluster nanme]
 ```
 
 * Confirm that the Namespace has been created
 
 ```execute-1
-kubectl get ns {{ session_namespace }} --kubeconfig=.kube/config
+kubectl get ns [my seesion namespace] --kubeconfig=.kube/config
 ```
 ```execute-all
 clear
