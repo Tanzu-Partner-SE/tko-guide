@@ -106,7 +106,7 @@ tmc cluster namespace create -n [my session namespace] -k [my session]-ws -c [my
 * Confirm that the Namespace has been created
 
 ```execute-1
-kubectl get ns [my seesion namespace] --kubeconfig=.kube/config
+kubectl get ns [my session namespace] --kubeconfig=.kube/config
 ```
 ```execute-all
 ```
