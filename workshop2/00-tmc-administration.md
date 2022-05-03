@@ -36,7 +36,7 @@ There is a one-to-one relationship between your cloud provider account and the c
 
     ![](images/aws-s3-3.png)
 
-    iii. On Create Stack, select Upload a template file and chose the downloaded template from step 3
+    iii. On Create Stack, select Upload a template file and choose the downloaded template from step 3
 
     ![](images/aws-s3-4.png)
 
@@ -92,7 +92,9 @@ Set up a credential object to connect to your Tanzu Observability by Wavefront a
 >**Note**: The value for these fields come from your Wavefront account, and not your Tanzu Mission Control account. For information about how to retrieve these values from your Wavefront account, see [Generate a Token for Tanzu Mission Control](ttp://docs.wavefront.com/integrations_tmc.html) and [Your Wavefront Account](ttps://docs.wavefront.com/users_account_managing.html) in the Tanzu Observability by Wavefront documentation.
 
 4. Click Create.
+
     ![](images/to-creds-2.png)
+
 You can optionally click Create and Add Role Binding which directs you to the Access tab of the Administration page where you can apply a role binding to the credential object to secure it. For more information about access control, see [Managing Access to Your Resources](ttps://docs.vmware.com/en/VMware-Tanzu-Mission-Control/services/tanzumc-using/GUID-CA5A31BC-4D7B-4EDD-A4C8-95BEEC08F7C4.html#GUID-CA5A31BC-4D7B-4EDD-A4C8-95BEEC08F7C4).
 
 
@@ -104,7 +106,7 @@ Create a role binding in the access policy for a credential to specify permissio
 
 _Prerequisites_
 
-Log in to the Tanzu Mission Control console, and then go to the Administration page.
+Log in to Tanzu Mission Control console, and then go to the Administration page.
 
 Make sure you have the appropriate permissions.
 
@@ -187,7 +189,7 @@ _Procedure_
 
 As a platform operator, you can work with your Tanzu Kubernetes Grid administrator to register a management cluster with VMware Tanzu Mission Control to enable lifecycle management of its workload clusters.
 
-When you register a management cluster, you create secure connection to Tanzu Mission Control that allows you to subsequently bring its workload clusters under management, assign them to cluster groups, and apply policies. You can also manage the entire lifecycle of your clusters (including create, update, and delete) from Tanzu Mission Control.
+When you register a management cluster, you create a secure connection to Tanzu Mission Control that allows you to subsequently bring its workload clusters under management, assign them to cluster groups, and apply policies. You can also manage the entire lifecycle of your clusters (including create, update, and delete) from Tanzu Mission Control.
 
 1. In the Tanzu Mission Control console, click **_Administration_** in the left navigation pane.
 
@@ -206,7 +208,7 @@ When you register a management cluster, you create secure connection to Tanzu Mi
 When you add workload clusters, you can choose the cluster group into which to place them. This setting simply indicates the default choice.
 
 5. You can optionally provide a description and labels for the management cluster.
-x
+
 6. Click **_Next_**.
 
 ![](images/mgmtcluster-vspsher-reg-2.png)
@@ -333,7 +335,7 @@ To view the status of your TMC subscription:
 
 When you run a backup using Tanzu Mission Control, the resources that you specify to be backed up are written to a storage location that you identify. This location can be the AWS S3 storage that is managed by Tanzu Mission Control in your cloud provider account, or an AWS S3 or S3-compatible storage location that you create and maintain in your cloud provider account. This procedure shows how to create a target location that you can use for backups.
 
-1. On the Administration a page, click the Target Locations tab.
+1. On the Administration page, click the Target Locations tab.
 
 ![](images/targetLocations-1.png)
 
@@ -358,7 +360,7 @@ ii. Enter a name for the bucket in which to store backups.
 
 iii. Specify the region in which to store backups.
 
-iv.Click Next.
+iv. Click Next.
 
 ![](images/targetLocations-tmc-minio-1.png)
 
