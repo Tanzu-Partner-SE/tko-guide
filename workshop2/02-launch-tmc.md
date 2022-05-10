@@ -35,39 +35,55 @@ tmc login -n tko-tmc-day1-w01-s001 --no-configure
 
 * Configure environment defaults that make the CLI easier to use. 
 
+```execute-1
 tmc system context configure -l "log" -m attached -p attached
+```
 
 **Create and prepare your TMC resources**
 
 * Create your session's **Cluster Group: tko-tmc-day1-w01-s001-cg**
 
+```execute-1
 tmc clustergroup create -n tko-tmc-day1-w01-s001-cg
+```
 
 * Confirm that the cluster group **[my session]-cg** has been created    
 
+```execute-1
 tmc clustergroup get tko-tmc-day1-w01-s001-cg
+```
    
 * Add your Cluster Group to the **aws-s3-store** Backup Location 
 
+```execute-1
 tmc dataprotection provider backuplocation update aws-s3-store --assigned-cluster-groups $(tmc dataprotection provider backuplocation get aws-s3-store -o json | jq -r '[.spec.assignedGroups[].clustergroup.name] + ["tko-tmc-day1-w01-s001-cg"] | @csv')
+```
 
 * Confirm that the cluster group **tko-tmc-day1-w01-s001-cg** has been added to **aws-s3-store** Backup Location 
 
+```execute-1
 tmc dataprotection provider backuplocation get aws-s3-store -o json
+```
 
 * Attach your Cluster: tko-tmc-day1-w01-s001-cluster to the tko-tmc-day1-w01-s001-cg Cluster Group
 
+```execute-1
 tmc cluster attach -g tko-tmc-day1-w01-s001-cg -n tko-tmc-day1-w01-s001-cluster -k .kube/config
+```
 
 On Tanzu Mission Control console, wait until the attachment is complete, and then the cluster **[my cluster name]** state changes to **Healthy**
 
 ![](images/tmc-attach.png)
 
+```execute-1
 tmc cluster validate -k .kube/config
+```
 
 * Create your session's **Workspace: tko-tmc-day1-w01-s001-ws**
 
+```execute-1
 tmc workspace create -n tko-tmc-day1-w01-s001-ws
+```
 
 * Confirm that the workspace **tko-tmc-day1-w01-s001-ws** has been created    
 
