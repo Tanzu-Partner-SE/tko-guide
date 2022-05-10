@@ -47,7 +47,7 @@ tmc system context configure -l "log" -m attached -p attached
 tmc clustergroup create -n tko-tmc-day1-w01-s001-cg
 ```
 
-* Confirm that the cluster group **[my session]-cg** has been created    
+* Confirm that the cluster group **tko-tmc-day1-w01-s001-cg** has been created    
 
 ```execute-1
 tmc clustergroup get tko-tmc-day1-w01-s001-cg
@@ -71,7 +71,7 @@ tmc dataprotection provider backuplocation get aws-s3-store -o json
 tmc cluster attach -g tko-tmc-day1-w01-s001-cg -n tko-tmc-day1-w01-s001-cluster -k .kube/config
 ```
 
-On Tanzu Mission Control console, wait until the attachment is complete, and then the cluster **[my cluster name]** state changes to **Healthy**
+On Tanzu Mission Control console, wait until the attachment is complete, and then the cluster **tko-tmc-day1-w01-s001-cluster** state changes to **Healthy**
 
 ![](images/tmc-attach.png)
 
