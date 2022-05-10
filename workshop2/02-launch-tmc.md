@@ -108,5 +108,4 @@ tmc cluster namespace create -n [my session namespace] -k [my session]-ws -c [my
 ```execute-1
 kubectl get ns [my session namespace] --kubeconfig=.kube/config
 ```
-```execute-all
-```
+
