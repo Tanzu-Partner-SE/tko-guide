@@ -97,7 +97,7 @@ When you configure an access policy at the organization level, it will cascade t
 * Create a policy 
 
     ```execute-1
-    tmc organization iam add-binding -r cluster.edit -u {{ session_namespace }}-user
+    tmc organization iam add-binding -r cluster.edit -u tko-tmc-day1-w01-s005-user
     ```
 * Confirm that the policy has been created    
 
@@ -121,7 +121,7 @@ When you configure an access policy at the cluster group level, it will automati
 
 ![](./images/policy-access-cg-1.png)
 
-- Click on the cluster group:  ***tko-day1-ops-cg***. 
+- Click on the cluster group:  ***tko-tmc-day1-w01-s001-cg***. 
 - Click the arrow next to the object name under Direct access policies.
 - Click Create Role Binding.
 - Select the ***cluster.admin*** role to grant administrative access to this cluster group that you want to bind to an identity.
@@ -134,7 +134,7 @@ When you configure an access policy at the cluster group level, it will automati
 <b>Note:</b></p>
 <p style='margin-left:1em;'>
 
-You can repeat the same step above for <b>{{ session_namespace }}-cluster</b> to assign access policies at cluster level 
+You can repeat the same step above for <b>tko-tmc-day1-w01-s001-cluster</b> to assign access policies at cluster level 
 
 </p>
 </span>
@@ -151,20 +151,20 @@ You can repeat the same step above for <b>{{ session_namespace }}-cluster</b> to
 * Create a policy 
     * Cluster Group Level
     ```execute-1
-    tmc clustergroup iam add-binding tko-day1-ops-cg -r cluster.edit -u {{ session_namespace }}-user 
+    tmc clustergroup iam add-binding tko-tmc-day1-w01-s001-cg -r cluster.edit -u tko-tmc-day1-w01-s001-user
     ```
     * Cluster Level
     ```execute-1
-    tmc cluster iam add-binding {{ session_namespace }}-cluster -r cluster.edit -u {{ session_namespace }}-user 
+    tmc cluster iam add-binding tko-tmc-day1-w01-s001-cluster -r cluster.edit -u tko-tmc-day1-w01-s001-user
     ```
 * Confirm that the policy has been created    
     * Cluster Group Level
     ```execute-1
-    tmc clustergroup iam get-policy tko-day1-ops-cg
+    tmc clustergroup iam get-policy tko-tmc-day1-w01-s001-cg
     ```
     * Cluster Level
     ```execute-1
-    tmc cluster iam get-policy {{ session_namespace }}-cluster
+    tmc cluster iam get-policy tko-tmc-day1-w01-s001-cluster
     ```
 </p> 
 </details>
@@ -180,7 +180,10 @@ Access policies can be configured at the workspace level either using TMC Consol
 
 ![](./images/policy-access-ws-1.png)
 
-* click on the workspace: ***tko-day1-ops-ws***. Similar to the steps given above, we can grant a desired role binding to the workspace:  ***tko-day1-ops-ws*** as shown below, this time grant the ***namespace.admin*** privilege to a group of users. 
+* click on the workspace: ***tko-tmc-day1-w01-s001-ws***. Similar to the steps given above, we can grant a desired 
+role binding to the workspace:  ***tko-tmc-day1-w01-s001-ws*** as shown below, 
+this time grant the ***namespace.admin*** privilege to a group of users. 
+
 * click Add after each identity, and then click Save.
 
 ![](./images/policy-access-ws-2.png)
@@ -207,12 +210,12 @@ You can repeat the same step above to assign access policies at namespace level
 * Create a policy 
 
     ```execute-1
-    tmc workspace iam add-binding tko-day1-ops-ws -r namespace.edit -u {{ session_namespace }}-user 
+    tmc workspace iam add-binding tko-tmc-day1-w01-s001-ws -r namespace.edit -u tko-tmc-day1-w01-s001-user
     ```
 * Confirm that the policy has been created    
 
     ```execute-1
-    tmc workspace iam get-policy tko-day1-ops-ws
+    tmc workspace iam get-policy tko-tmc-day1-w01-s001-ws
     ```
 </p> 
 </details>
@@ -220,14 +223,14 @@ You can repeat the same step above to assign access policies at namespace level
 <p>
 </p>
 
-<b><u>Connect to *{{ session_namespace }}-cluster* with kubectl</u></b>
+<b><u>Connect to *ko-tmc-day1-w01-s001-cluster* with kubectl</u></b>
 
 <details>
 <summary><b>TMC Console</b></summary>
 <p>
 
 1. In the left navigation pane of the Tanzu Mission Control console, click Clusters.
-2. On the Clusters page, click ***{{ session_namespace }}-cluster***.
+2. On the Clusters page, click ***tko-tmc-day1-w01-s001-cluster***.
 3. On the cluster detail page, in the upper right corner, click Access this cluster.
 ![](./images/cluster-access-1.png)
 4. In the resulting popup modal, click Download KUBECONFIG file. and save the downloaded YAML file in a location that is accessible to kubectl (for example, in `~/.kube/config` or in a location specified in the KUBECONFIG environment variable).
@@ -240,7 +243,7 @@ You can repeat the same step above to assign access policies at namespace level
 <p>
 
 ```execute-1
-tmc cluster auth kubeconfig get {{ session_namespace }}-cluster > kubeconfig.yaml 
+tmc cluster auth kubeconfig get tko-tmc-day1-w01-s001-cluster > kubeconfig.yaml
 ```
 </p> 
 </details>
@@ -258,21 +261,24 @@ kubectl get po -A --kubeconfig=kubeconfig.yaml
 * Delete the created policy at the organization level
 
     ```execute-1
-    tmc organization iam remove-binding -r cluster.edit -u {{ session_namespace }}-user 
+    tmc organization iam remove-binding -r cluster.edit -u tko-tmc-day1-w01-s001-user
     ``` 
+
 * Delete the created policy at Cluster Group Level & at Cluster Level
 
     * Cluster Group Level
     ```execute-1
-    tmc clustergroup iam remove-binding tko-day1-ops-cg -r cluster.edit -u {{ session_namespace }}-user 
+    tmc clustergroup iam remove-binding tko-tmc-day1-w01-s001-cg -r cluster.edit -u tko-tmc-day1-w01-s001-user
     ```
 
     * Cluster Level
     ```execute-1
-    tmc cluster iam remove-binding {{ session_namespace }}-cluster -r cluster.edit -u {{ session_namespace }}-user 
+    tmc cluster iam remove-binding tko-tmc-day1-w01-s001-cluster -r cluster.edit -u tko-tmc-day1-w01-s001-user
     ```
+
 * Delete the created policy at the workspace level
 
     ```execute-1
-    tmc workspace iam remove-binding tko-day1-ops-ws -r namespace.edit -u {{ session_namespace }}-user 
-    ```     
+    tmc workspace iam remove-binding tko-tmc-day1-w01-s001-ws -r namespace.edit -u tko-tmc-day1-w01-s001-user
+    ```
+
