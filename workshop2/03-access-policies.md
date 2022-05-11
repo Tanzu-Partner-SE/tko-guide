@@ -97,7 +97,7 @@ When you configure an access policy at the organization level, it will cascade t
 * Create a policy 
 
     ```execute-1
-    tmc organization iam add-binding -r cluster.edit -u tko-tmc-day1-w01-s005-user
+    tmc organization iam add-binding -r cluster.edit -u tko-tmc-day1-w01-s001-user
     ```
 * Confirm that the policy has been created    
 
