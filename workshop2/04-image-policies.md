@@ -36,14 +36,14 @@ As quick example we are going to create a *`Require Digest`* recipe policy using
 
 ![](./images/policy-image-registry-1.png)
 
-Select your workspace ***{{ session_namespace }}-ws*** and click Create Image 
+Select your workspace ***tko-tmc-day1-w01-s001-ws*** and click Create Image 
 Registry Policy. We are going to configure that all the container 
 images to be deployed to this workspace must have a container digest. 
 Under Image registry template dropdown, select Require Digest:
 
 ![](./images/policy-image-registry-digest-1.png)
 
-Give it a name such as `{{ session_namespace }}-di-policy`{{copy}} and proceed with default values 
+Give it a name such as `tko-tmc-day1-w01-s001-di-policy` and proceed with default values 
 for other fields. If needed, you may specify label selectors to 
 include or exclude certain namespaces for this policy. 
 Finally click Create Policy. 
@@ -126,7 +126,7 @@ tmc workspace image-policy delete tko-tmc-day1-w01-s001-di-policy --workspace-na
 ```
 
 
-Now let's create a custom policy in workspace ***ko-tmc-day1-w01-s020-ws*** that blocks any container image that doesn't have the name `busybox`: 
+Now let's create a custom policy in workspace ***ko-tmc-day1-w01-s001-ws*** that blocks any container image that doesn't have the name `busybox`: 
 
 <div class="info" style='background-color:#e7f3fe; color: #000000; border-left: solid #2196F3 4px; border-radius: 4px; padding:0.7em;'>
 <span>
@@ -190,7 +190,7 @@ spec:
     ```execute-1
     tmc workspace image-policy create -f busybox-image-policy.yaml 
     ```
-* Confirm that the image policy has been created and synced to the **tko-tmc-day1-w01-s020-cluster**:
+* Confirm that the image policy has been created and synced to the **tko-tmc-day1-w01-s001-cluster**:
 
     ```execute-1
     tmc workspace image-policy get busybox-ip-cli --workspace-name tko-tmc-day1-w01-s001-ws
@@ -285,7 +285,7 @@ Now, let's create a policy that will allow pulling images from a particular cont
 <summary><b>TMC CLI</b></summary>
 <p>
 
-Before we apply this policy using the TMC CLI, let's have a look on its definition:
+Before we apply this policy using the TMC CLI, let's have a look at its definition:
 
 ```execute-1
 ### file: ~/registry-hotsname-policy.yaml
