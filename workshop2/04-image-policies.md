@@ -16,7 +16,7 @@ Examples of image registry polices include:
 <p style='margin-top:1em; text-align:left'>
 <b>Note:</b></p>
 <p style='margin-left:1em;'>
-Image registry policies cannot be set at a cluster level. To set an image registry policy, select Workspaces under the Image Registry tab in the Policies page.
+Image registry policies cannot be set at a cluster level. Image policies can be assigned only at workspace level or at the organization level.
 </p>
 </span>
 </div>
@@ -36,7 +36,7 @@ As quick example we are going to create a *`Require Digest`* recipe policy using
 
 ![](./images/policy-image-registry-1.png)
 
-Select a workspace such as ***tko-day1-ops-ws*** and click Create Image 
+Select your workspace ***{{ session_namespace }}-ws*** and click Create Image 
 Registry Policy. We are going to configure that all the container 
 images to be deployed to this workspace must have a container digest. 
 Under Image registry template dropdown, select Require Digest:
@@ -55,30 +55,21 @@ registry policies to specify a name-tag allowlist, block the latest tag, or even
 
 Once created, you may edit or delete an image registry policy.
 
-
-Since image policies can be assigned to a workspace or at the organization level only that will cascade to the namespace(s) underneath. Now, let's create a new namespace and add it to the workspace **tko-day1-ops-ws**:
-
-```execute-1
-tmc cluster namespace create -n {{ session_namespace }} -k tko-day1-ops-ws -c {{ session_namespace }}-cluster
-```
-
-Confirm that the Namespace has been created
-
-```execute-1
-kubectl get ns {{ session_namespace }} --kubeconfig=.kube/config
-```
-
 Let's validate that our image *`Require Digest`* registry policy is working by trying to deploy a container image with and without a gigest to the namespace **{{ session_namespace }}**
  
 * Confirm that the policy has been created    
     
     ```execute-1
-    tmc workspace image-policy get {{ session_namespace }}-di-policy  --workspace-name tko-day1-ops-ws 
+    tmc workspace image-policy get {{ session_namespace }}-di-policy  --workspace-name {{ session_namespace }}-ws 
     ```
     ```execute-1
     kubectl describe opapolicies.intents.tmc.cloud.vmware.com --kubeconfig=.kube/config wsp.{{ session_namespace }}.{{ session_namespace }}-di-policy.vmware-system-tmc-allowed-images-v1
     ```
+* Wait until all pods in **gatekeeper-system** Namespace are in **Ready** Status
 
+    ```execute-1
+    kubectl get pods -n gatekeeper-system
+    ```
 * Create a deployment with **nginx** image:
 
 ```execute-1
@@ -135,14 +126,14 @@ kubectl --kubeconfig=.kube/config delete deployment nginx-with-digest -n {{ sess
 * Delete the created policy 
 
 ```execute-1
-tmc workspace image-policy delete {{ session_namespace }}-di-policy --workspace-name tko-day1-ops-ws
+tmc workspace image-policy delete {{ session_namespace }}-di-policy --workspace-name {{ session_namespace }}-ws
 ```
 
 ```execute-all
 clear
 ```
 
-Now let's create a custom policy in workspace ***tko-day1-ops-ws*** that blocks any container image that doesn't have the name `busybox`: 
+Now let's create a custom policy in workspace ***{{ session_namespace }}-ws*** that blocks any container image that doesn't have the name `busybox`: 
 
 <div class="info" style='background-color:#e7f3fe; color: #000000; border-left: solid #2196F3 4px; border-radius: 4px; padding:0.7em;'>
 <span>
@@ -162,7 +153,7 @@ When you define a custom policy, you can use wildcards to match specific pattern
 <summary><b>TMC Console</b></summary>
 <p>
 
-1. Click Workspaces under the Image Registry tab in the Policies page and select workspace ***tko-day1-ops-ws***
+1. Click Workspaces under the Image Registry tab in the Policies page and select workspace ***{{ session_namespace }}-ws***
 
 2. Click Create Image Registry Policy
 
@@ -190,14 +181,14 @@ file: ~/busybox-image-policy.yaml
 
 ```editor:select-matching-text
 file: ~/busybox-image-policy.yaml
-text: "name: (.*)"
+text: "workspaceName: (.*)"
 isRegex: true
 group: 1
 ```
 
 ```editor:replace-text-selection
 file: ~/busybox-image-policy.yaml
-text: "{{ session_namespace }}-ip-cli"
+text: "{{ session_namespace }}-ws"
 ```
 * Create the image policy 
 
@@ -207,13 +198,19 @@ text: "{{ session_namespace }}-ip-cli"
 * Confirm that the image policy has been created and synced to the {{ session_namespace }}-cluster   
 
     ```execute-1
-    tmc workspace image-policy get {{ session_namespace }}-ip-cli  --workspace-name tko-day1-ops-ws 
+    tmc workspace image-policy get busybox-ip-cli --workspace-name {{ session_namespace }}-ws 
     ```
 
     ```execute-1
-    kubectl describe opapolicies.intents.tmc.cloud.vmware.com --kubeconfig=.kube/config wsp.{{ session_namespace }}.{{ session_namespace }}-ip-cli.vmware-system-tmc-allowed-images-v1
+    kubectl describe opapolicies.intents.tmc.cloud.vmware.com --kubeconfig=.kube/config wsp.{{ session_namespace }}.busybox-ip-cli.vmware-system-tmc-allowed-images-v1
     ```
-* Repeat the previous command until the policy **Status** changes to **True**    
+* Repeat the previous command until the policy **Status** changes to **True**
+
+* Wait until all pods in **gatekeeper-system** Namespace are in **1/1 Ready** Status
+
+    ```execute-2
+    kubectl get pods -n gatekeeper-system
+    ```
 </p>
 </details>
 <p>
@@ -232,7 +229,7 @@ Sometimes it take a few seconds for the policy to be effective. If the test belo
 </p>
 
 Let's validate that our image registry policy is working by trying to deploy the busybox image and non-busybox image to the namespace **{{ session_namespace }}**, 
-which is part of the workspace **tko-day1-ops-ws**. 
+which is part of the workspace **{{ session_namespace }}-ws**. 
 
 * Create a deployment with **nginx** image:
 
@@ -281,7 +278,7 @@ kubectl --kubeconfig=.kube/config get events --field-selector type=Warning -n {{
 * Delete the created policy 
 
 ```execute-1
-tmc workspace image-policy delete {{ session_namespace }}-ip-cli  --workspace-name tko-day1-ops-ws 
+tmc workspace image-policy delete busybox-ip-cli --workspace-name {{ session_namespace }}-ws 
 ```
 * Delete the busybox deployment
 
@@ -304,14 +301,14 @@ file: ~/registry-hotsname-policy.yaml
 
 ```editor:select-matching-text
 file: ~/registry-hotsname-policy.yaml
-text: "name: (.*)"
+text: "workspaceName: (.*)"
 isRegex: true
 group: 1
 ```
 
 ```editor:replace-text-selection
 file: ~/registry-hotsname-policy.yaml
-text: "{{ session_namespace }}-rp-cli"
+text: "{{ session_namespace }}-ws"
 ```
 
 * Create a policy 
@@ -322,11 +319,20 @@ text: "{{ session_namespace }}-rp-cli"
 * Confirm that the policy has been created    
 
     ```execute-1
-    tmc workspace image-policy get {{ session_namespace }}-rp-cli  --workspace-name tko-day1-ops-ws 
+    tmc workspace image-policy get registry-hotsname-policy --workspace-name {{ session_namespace }}-ws 
     ```
     ```execute-1
-    kubectl describe opapolicies.intents.tmc.cloud.vmware.com --kubeconfig=.kube/config wsp.{{ session_namespace }}.{{ session_namespace }}-rp-cli.vmware-system-tmc-allowed-images-v1
+    kubectl describe opapolicies.intents.tmc.cloud.vmware.com --kubeconfig=.kube/config wsp.{{ session_namespace }}.registry-hotsname-policy.vmware-system-tmc-allowed-images-v1
     ```
+
+* Repeat the previous command until the policy **Status** changes to **True**  
+
+* Wait until all pods in **gatekeeper-system** Namespace are in **1/1 Ready** Status
+
+    ```execute-2
+    kubectl get pods -n gatekeeper-system
+    ```
+
 * Create a deployment with **nginx** image from **docker hub**:
 
     ```execute-1
@@ -344,6 +350,7 @@ text: "{{ session_namespace }}-rp-cli"
     kubectl --kubeconfig=.kube/config get events --field-selector type=Warning -n {{ session_namespace }} --sort-by='.metadata.creationTimestamp'
     ```
 * Delete the deployment
+
     ```execute-1
     kubectl --kubeconfig=.kube/config delete deployment nginx -n {{ session_namespace }}
     ```
@@ -354,10 +361,12 @@ text: "{{ session_namespace }}-rp-cli"
 * Delete the created policy 
 
     ```execute-1
-    tmc workspace image-policy delete {{ session_namespace }}-rp-cli --workspace-name tko-day1-ops-ws
+    tmc workspace image-policy delete registry-hotsname-policy --workspace-name {{ session_namespace }}-ws
     ```
 </p>
 </details>
-
-
-
+<p>
+</p>
+```execute-all
+clear
+```
