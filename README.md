@@ -7,6 +7,10 @@ Reviewing a workshop guide will reinforce the technologies just learned at the w
 
 Each workshop guide is independent of each other and may be viewed in any order you like.
 
+
+The TKO guides here may be used as a reference that is available anytime, 
+while the workshop content is only available during the actual workshop.
+
 - TKG Workshop Guide
 - [TMC Workshop Guide](./workshop2/README.md)
 - TSM Workshop Guide
