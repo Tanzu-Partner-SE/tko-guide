@@ -28,7 +28,7 @@ are:
 - *`custom-egress`* (define an egress policy). In this case, we select *allow-all*.
 
 
-5. Provide a policy name: `allow-all-policy`{{copy}}.
+5. Provide a policy name: `allow-all-policy`.
 
 6. Click Create Policy.
 
