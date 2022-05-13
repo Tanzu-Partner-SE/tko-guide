@@ -28,7 +28,7 @@ To create these policies:
 <summary><b>TMC CLI</b></summary>
 <p>
 
-* Before we apply this policy using the TMC CLI, let's have a look on its definition and do some modifications
+* Before we apply this policy using the TMC CLI, let's have a look at its definition:
 
 ```editor:open-file
 ### file: ~/strict-security-policy.yaml
@@ -72,8 +72,7 @@ spec:
 <p>
 </p>
 
-Now we will deploy an app with root privileges on the cluster **
-tkoworkshop-w01-s001-cluster** that has security policy enabled.
+Now we will deploy an app with root privileges on the cluster **tkoworkshop-w01-s001-cluster** that has security policy enabled.
 
 * Go to the workshop tab, on the Terminal Tab
 
