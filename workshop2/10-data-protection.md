@@ -11,24 +11,25 @@ You can selectively restore the backups you have created, by specifying the foll
 * the entire backup
 * selected namespaces from the backup
 * specific resources from the backup identified by a given label
+
 Additionally, you can schedule regular backups and manage the storage of backups and volume snapshots you create by specifying a retention period for each backup and deleting backups that are no longer needed.
 
 When you perform a backup for a cluster, Tanzu Mission Control uses Velero to create a backup of the specified Kubernetes resources with snapshots of persistent volume data, and then stores the backup in the location that you specify.
 
-**Enable Data Protection for *{{ session_namespace }}-cluster* Cluster**
+**Enable Data Protection for *tkoworkshop-w01-s001-cluster* Cluster**
 
 Before you can use Tanzu Mission Control to back up data resources in your clusters, you must set up your cluster and your target location. This procedure describes how to install the data protection extension (and Velero) on your cluster so that you can use Tanzu Mission Control to perform data protection actions using a specified backup location.
 
 ```execute-1
-tmc cluster dataprotection create --cluster-name {{ session_namespace }}-cluster
+tmc cluster dataprotection create --cluster-name tkoworkshop-w01-s001-cluster
 ```
-Wait until **STATUS** of {{ session_namespace }}-cluster cluster to become **READY**
+Wait until **STATUS** of **tkoworkshop-w01-s001-cluster** cluster to become **READY**
 
 ```execute-1
-tmc cluster dataprotection list --cluster-name {{ session_namespace }}-cluster
+tmc cluster dataprotection list --cluster-name tkoworkshop-w01-s001-cluster
 ```
 
-Now we will deploy the Petclinic Spring boot sample app with persistent data in mysql database on the cluster **{{ session_namespace }}-cluster** in the **app** Namespace.
+Now we will deploy the Petclinic Spring boot sample app with persistent data in mysql database on the cluster **tkoworkshop-w01-s001-cluster** in the **app** Namespace.
 
 * Go to the workshop tab, on the Terminal Tab
 
@@ -67,15 +68,15 @@ url: {{ ingress_protocol }}://{{ session_namespace }}-petclinic.{{ ingress_domai
 
 For Example: 
 
-First Name: `Example`{{copy}}
+First Name: `Example`
 
-Last Name: `User`{{copy}}
+Last Name: `User`
 
-Address: `Example Address 01`{{copy}}
+Address: `Example Address 01`
 
-City: `Example City`{{copy}}
+City: `Example City`
 
-Telephone: `0123456789`{{copy}}
+Telephone: `0123456789`
 
 
 3. Confirm that the owner has been added to the list 
@@ -86,18 +87,21 @@ FIND OWNERS -> Find Owner
 * Let's make a backup of our Petclinic App
 
 ```execute-1
-tmc cluster dataprotection backup create -n petclinic-app-backup --include-namespaces app --backup-location-name aws-s3-store --cluster-name {{ session_namespace }}-cluster
+tmc cluster dataprotection backup create -n petclinic-app-backup --include-namespaces app --backup-location-name aws-s3-store --cluster-name tkoworkshop-w01-s001-cluster
 ```
 * Check the STATUS of the **petclinic-app-backup** backup
 
 ```execute-2
-tmc cluster dataprotection backup list --name petclinic-app-backup --cluster-name {{ session_namespace }}-cluster
+tmc cluster dataprotection backup list --name petclinic-app-backup --cluster-name tkoworkshop-w01-s001-cluster
 ```
 
 **Now, let's simulate disaster scenario**
 
 ```execute-1
 kubectl delete ns app
+```
+```execute-1
+kubectl get ns app
 ```
 * Try to access the Petclinic App
 
@@ -108,26 +112,39 @@ name: Petclinic APP
 name: Petclinic APP
 url: {{ ingress_protocol }}://{{ session_namespace }}-petclinic.{{ ingress_domain }}
 ```
-```dashboard:reload-dashboard
-name: Petclinic APP
-url: {{ ingress_protocol }}://{{ session_namespace }}-petclinic.{{ ingress_domain }}
-```
+
 * Let's trigger a restore process 
 
 ```execute-1
-tmc cluster dataprotection restore create -n petclinic-app-restore --include-namespaces app --backup-name petclinic-app-backup --cluster-name {{ session_namespace }}-cluster
+tmc cluster dataprotection restore create -n petclinic-app-restore --include-namespaces app --backup-name petclinic-app-backup --cluster-name tkoworkshop-w01-s001-cluster
 ```
 * Check the STATUS of the **petclinic-app-restore** restore
 
 ```execute-2
-tmc cluster dataprotection restore list --name petclinic-app-restore --cluster-name {{ session_namespace }}-cluster
+tmc cluster dataprotection restore list --name petclinic-app-restore --cluster-name tkoworkshop-w01-s001-cluster
 ```
 
-3. Confirm that the newly created owner is in the list 
+* Confirm that the newly created owner is in the list 
+
+```dashboard:delete-dashboard
+name: Petclinic APP
+```
+```dashboard:create-dashboard
+name: Petclinic APP
+url: {{ ingress_protocol }}://{{ session_namespace }}-petclinic.{{ ingress_domain }}
+```
 
 FIND OWNERS -> Find Owner
 ![](./images/petclinic-3.png)
 
 ```dashboard:delete-dashboard
 name: Petclinic APP
+```
+* Delete the created backup/restore resources  
+
+```execute-1
+tmc cluster dataprotection backup delete petclinic-app-backup --cluster-name tkoworkshop-w01-s001-cluster
+```
+```execute-1
+tmc cluster dataprotection restore delete petclinic-app-restore --cluster-name tkoworkshop-w01-s001-cluster
 ```
