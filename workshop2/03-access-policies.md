@@ -223,7 +223,7 @@ You can repeat the same step above to assign access policies at namespace level
 <p>
 </p>
 
-<b><u>Connect to *ko-tmc-day1-w01-s001-cluster* with kubectl</u></b>
+<b><u>Connect to *tko-tmc-day1-w01-s001-cluster* with kubectl</u></b>
 
 <details>
 <summary><b>TMC Console</b></summary>
