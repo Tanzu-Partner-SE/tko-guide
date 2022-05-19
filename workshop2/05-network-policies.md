@@ -42,7 +42,7 @@ Before we apply this policy using the TMC CLI, let's have a look at its definiti
 ### file: ~/network-policy.yaml
 fullName:
   name: custom-ingress
-  workspaceName: tkoworkshop-w01-s001-ws:
+  workspaceName: tkoworkshop-w01-s001-ws
 spec:
   input:
     rules:
