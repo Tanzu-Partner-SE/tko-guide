@@ -9,31 +9,37 @@ Custom policies in Tanzu Mission Control are implemented using the Gatekeeper pr
 <p>
 
 * On the Policies page, click the Custom tab, and then click the Clusters organization view
-* Use the tree control to navigate to **{{ session_namespace }}-cluster** Cluster under the Cluster Group **tko-day1-ops** 
+* Use the tree control to navigate to 
+**tkoworkshop-w01-s001-cluster** Cluster under the Cluster Group **tkoworkshop-w01-s001-cg** 
 * Click Create Custom Policy
-* On the custom policy create form, select the policy template **tmc-require-labels** , and then provide a name `{{ session_namespace }}-rl-ui`{{copy}} for the policy
-* Specify the target resources *Deployment*, and then click **Add Resource**
-* Specify parameters for your policy, under **Key** add **env**
+* On the custom policy create form, select the policy template **tmc-require-labels** , and then 
+provide a name `tkoworkshop-w01-s001-rl-ui` for the policy
+* Specify the target resources ***Deployment*** in **Kind** field and ***apps*** in the **API Group** field, and then click **Add Resource**
+* Specify parameters for your policy, under **Key** add `env`
 * Click **Create Policy**
 
-Now we will deploy an app without the required tags on the cluster **{{ session_namespace }}-cluster** .
+* Wait until all pods in **gatekeeper-system** Namespace are in **1/1 Ready** Status
+
+    ```execute-2
+    kubectl get pods -n gatekeeper-system
+    ```    
+
+Now we will deploy an app without the required tags on the cluster **tkoworkshop-w01-s001-cluster** .
 
 * Let's deploy an app that doesn't have the required label key
 
 ```execute-1
 kubectl apply -f deployment-without-tags.yaml --kubeconfig=.kube/config -n default
 ```
-```execute-1
-kubectl get po --kubeconfig=.kube/config -n default
-```
-```execute-1
-kubectl get rs --kubeconfig=.kube/config -n default
-```
+
 * Notice that the admission webhook blocks the creation due to the missing tags in the deployment metadata:
 
-```execute-1
-kubectl get events --field-selector type=Warning --kubeconfig=.kube/config -n default --sort-by='.metadata.creationTimestamp'
 ```
+Error from server ([tmc.cp.tkoworkshop-w01-s001-rl-ui] You must provide labels with keys: {"env"}): error when 
+creating "deployment-without-tags.yaml": admission webhook "validation.gatekeeper.sh" denied the request: 
+[tmc.cp.tkoworkshop-w01-s001-rl-ui] You must provide labels with keys: {"env"}
+```
+
 ```execute-1
 kubectl delete -f deployment-without-tags.yaml --kubeconfig=.kube/config -n default
 ```
@@ -52,5 +58,5 @@ kubectl get po --kubeconfig=.kube/config -n default
 kubectl delete -f deployment-with-tags.yaml --kubeconfig=.kube/config -n default
 ```
 ```execute-1
-tmc cluster custom-policy delete {{ session_namespace }}-rl-ui --cluster-name {{ session_namespace }}-cluster 
+tmc cluster custom-policy delete tkoworkshop-w01-s001-rl-ui --cluster-name tkoworkshop-w01-s001-cluster
 ```
