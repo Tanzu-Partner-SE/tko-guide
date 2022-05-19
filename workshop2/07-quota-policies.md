@@ -9,8 +9,7 @@ On the flip side, this means the teams managing the platform need to be aware of
 <p>
 
 * Go to the tab with Tanzu Mission Control, click on Policies then Assignments
-* Click on the tab **Quota**, select CLUSTERS then click on Cluster Group >  **tkoworkshop-w01-s001-cg** 
-> **tkoworkshop-w01-s001-cluster**
+* Click on the tab **Quota**, select CLUSTERS then click on Cluster Group >  **tkoworkshop-w01-s001-cg** > **tkoworkshop-w01-s001-cluster**
 * Click on CREATE QUOTA POLICY
 * Select the **Quota policy** *Small*
 * Provide a policy name `small-qp-ui`
@@ -35,6 +34,8 @@ Notice it has been assigned a quota to requests of 0.5 vCPU / 512 MB memory and 
 </p>
 <summary><b>TMC CLI</b></summary>
 <p>
+
+First have a look at this quota definition file:
 
 ```editor:open-file
 ### file: ~/small-quota-policy.yaml
