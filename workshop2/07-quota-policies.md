@@ -35,7 +35,7 @@ Notice it has been assigned a quota to requests of 0.5 vCPU / 512 MB memory and 
 <summary><b>TMC CLI</b></summary>
 <p>
 
-First have a look at this quota definition file:
+* First have a look at this quota definition file:
 
 ```editor:open-file
 ### file: ~/small-quota-policy.yaml
