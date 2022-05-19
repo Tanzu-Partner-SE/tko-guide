@@ -43,20 +43,9 @@ kubectl apply -f ./petclinic-app/deployment.yaml -n app
 ```
 * Wait until the PODs in the **app** namespace are up and running 
 
-```dashboard:reload-dashboard
-name: Console
-prefix: Console
-title: List pods in namespace app
-url: {{ingress_protocol}}://{{session_namespace}}-console.{{ingress_domain}}/#/pod?namespace=app
-description: ""
-```
 
 * Open the Petclinic app and insert a new owner to list of the sample owners list 
 
-```dashboard:create-dashboard
-name: Petclinic APP
-url: {{ ingress_protocol }}://{{ session_namespace }}-petclinic.{{ ingress_domain }}
-```
 
 1. Click FIND OWNERS -> Add Owner
 
@@ -105,14 +94,6 @@ kubectl get ns app
 ```
 * Try to access the Petclinic App
 
-```dashboard:delete-dashboard
-name: Petclinic APP
-```
-```dashboard:create-dashboard
-name: Petclinic APP
-url: {{ ingress_protocol }}://{{ session_namespace }}-petclinic.{{ ingress_domain }}
-```
-
 * Let's trigger a restore process 
 
 ```execute-1
@@ -126,13 +107,6 @@ tmc cluster dataprotection restore list --name petclinic-app-restore --cluster-n
 
 * Confirm that the newly created owner is in the list 
 
-```dashboard:delete-dashboard
-name: Petclinic APP
-```
-```dashboard:create-dashboard
-name: Petclinic APP
-url: {{ ingress_protocol }}://{{ session_namespace }}-petclinic.{{ ingress_domain }}
-```
 
 FIND OWNERS -> Find Owner
 ![](./images/petclinic-3.png)
