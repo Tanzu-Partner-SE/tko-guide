@@ -55,7 +55,7 @@ registry policies to specify a name-tag allowlist, block the latest tag, or even
 
 Once created, you may edit or delete an image registry policy.
 
-Let's validate that our image *`Require Digest`* registry policy is working by trying to deploy a container image with and without a digest to the namespace **{{ session_namespace }}**
+Let's validate that our image *`Require Digest`* registry policy is working by trying to deploy a container image with and without a digest to the namespace **tko-tmc-day1-w01-s001**
  
 * Confirm that the policy has been created    
     
