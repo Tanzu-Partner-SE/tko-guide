@@ -13,5 +13,5 @@ while the workshop content is only available during the actual workshop.
 
 - TKG Workshop Guide
 - [TMC Workshop Guide](./workshop2/README.md)
-- [TSM Workshop Guide](./workshop4/workshop-overview.md)
-- TO Workshop Guide
+- TSM Workshop Guide
+- [TO Workshop Guide](./workshop4/workshop-overview.md)
