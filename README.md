@@ -11,7 +11,7 @@ Each workshop guide is independent of each other and may be viewed in any order 
 The TKO guides here may be used as a reference that is available anytime, 
 while the workshop content is only available during the actual workshop.
 
-- TKG Workshop Guide
+- [TKG Workshop Guide](https://github.com/Tanzu-Partner-SE/TKG-workshop-module1/blob/main/README.md)
 - [TMC Workshop Guide](./workshop2/README.md)
 - [TSM Workshop Guide](https://github.com/Tanzu-Partner-SE/tsm-tko#readme)
 - [TO Workshop Guide](./workshop4/workshop-overview.md)
