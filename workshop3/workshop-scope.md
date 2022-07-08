@@ -1,4 +1,6 @@
 
+# **Workshop on TSM Enablement**
+
 Lab 1 – [Preparation Steps - This lab covers the preparation needed before cluster can be onboarded to TSM.](./01-Tanzu-Service-Mesh-Pre-Check.md)
 
 Lab 2 – [Cluster Onboarding - Onboarding Clusters to TSM](02-Tanzu-Service-Mesh-Cluster-Onboarding.md)
