@@ -1,7 +1,5 @@
-#### What is covered in this workshop?
 
-
-Lab 1 – [Preparation Steps - This lab covers the preparation needed before cluster can be onboarded to TSM.] (./01-Tanzu-Service-Mesh-Pre-Check.md)
+Lab 1 – [Preparation Steps - This lab covers the preparation needed before cluster can be onboarded to TSM.](./01-Tanzu-Service-Mesh-Pre-Check.md)
 - Lab 2 – [Cluster Onboarding - Onboarding Clusters to TSM]
 - Lab 3 - [Deploy the Acme Fitness Application on Clusters - Deploy Acme Fitness application on an EKS and AKS clusters.]
 - Lab 4 - [Integrate TSM with AWS account for DNS and GSLB configuration - Information only lab]
