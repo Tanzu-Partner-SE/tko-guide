@@ -3,7 +3,7 @@
 
 This workshop helps you to gain experience and understanding on the topics below utilizing Tanzu Observability: 
 
-Lab 1 [Connect TO from TMC](./TO-Lab-Module-1.md)
+- Lab 1 [Connect TO from TMC](./TO-Lab-Module-1.md)
 Lab 2 [Deploy ACME Fitness Application](./TO-Lab-Module-2.md)
 Lab 3 [Setup Wavefront Proxy](./TO-Lab-Module-3.md)
 Lab 4 [Explore Distributed Tracing Capabilities](./TO-Lab-Module-4.md)
