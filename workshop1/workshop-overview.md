@@ -17,7 +17,7 @@ This workshop helps you to get some good understanding on below topics:
 
 - Lab 7 - [TMC API](./07-TMC-API.md)
 
-- Lab 8 - [Auotomation using Terraform](./08-TMC-Terraform.md)
+- Lab 8 - [Automation using Terraform](./08-TMC-Terraform.md)
 
 
 For more info you can refer to: 
