@@ -3,9 +3,9 @@
 
 This workshop helps you to get some good understanding on below topics: 
 
-- Lab 1 - [Creaate Management & Worklod clusters and Deploy Test Applicaaaation](./01-TKG.md)
+- Lab 1 - [Create Management & Workload clusters and Deploy Test Application](./01-TKG.md)
 
-- Lab 2 - [Register Management cluster into TMC using TMC CLI](./02-tmc.md)
+- Lab 2 - [Register Management cluster with TMC using TMC CLI](./02-tmc.md)
 
 - Lab 3 - [Install Packages into workload cluster using TMC - Cert Manager, Contour, harbor.](./03-tmc-packages.md)
 
